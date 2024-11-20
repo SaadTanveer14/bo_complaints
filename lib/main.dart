@@ -1,9 +1,9 @@
-import 'package:bo_complaints/app_colors.dart';
+import 'package:bo_complaints/UI/constants/app_colors.dart';
 import 'package:bo_complaints/bloc/complaints/complaint_event.dart';
 import 'package:bo_complaints/bloc/complaints/compliant_bloc.dart';
 import 'package:bo_complaints/data/repository/complaints_provider.dart';
 import 'package:bo_complaints/data/repository/complaints_repository.dart';
-import 'package:bo_complaints/home.dart';
+import 'package:bo_complaints/UI/Widgets/Screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

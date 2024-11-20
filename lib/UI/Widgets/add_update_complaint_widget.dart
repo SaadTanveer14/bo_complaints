@@ -1,4 +1,4 @@
-import 'package:bo_complaints/app_colors.dart';
+import 'package:bo_complaints/UI/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ComplaintBottomSheet extends StatelessWidget {

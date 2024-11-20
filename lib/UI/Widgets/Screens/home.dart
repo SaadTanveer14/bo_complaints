@@ -1,6 +1,6 @@
-import 'package:bo_complaints/Widgets/add_update_complaint_widget.dart';
-import 'package:bo_complaints/Widgets/complaint_widget.dart';
-import 'package:bo_complaints/app_colors.dart';
+import 'package:bo_complaints/UI/Widgets/add_update_complaint_widget.dart';
+import 'package:bo_complaints/UI/Widgets/complaint_widget.dart';
+import 'package:bo_complaints/UI/constants/app_colors.dart';
 import 'package:bo_complaints/bloc/complaints/complaint_event.dart';
 import 'package:bo_complaints/bloc/complaints/compliant_bloc.dart';
 import 'package:bo_complaints/bloc/complaints/compliant_state.dart';
@@ -112,47 +112,39 @@ class _HomePageState extends State<HomePage> {
 
             Padding(
               padding: const EdgeInsets.all(20),
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text('SORT BY ', style: GoogleFonts.plusJakartaSans(fontSize: 10, color: AppColors.primaryColor),),
-                      Text('DATE ADDED ', style: GoogleFonts.plusJakartaSans(fontSize: 10, color: AppColors.primaryColor, fontWeight: FontWeight.w600),),
-                      const Icon(
-                        Icons.keyboard_arrow_down_outlined,
-                        color: AppColors.primaryColor,
-                      )
-                    ],
-                  ),
-
-                  Container(
-                    height: 0.6 * screenHeight,
-                    child: BlocBuilder<ComplaintsBloc, ComplaintsState>(
-                        builder: (context, state) {
-                          if (state is ComplaintsLoading) {
-                            return Center(child: CircularProgressIndicator());
-                          } else if (state is ComplaintsLoaded) {
-                            return ListView.separated(
-                              itemCount: state.complaints.length,
-                              itemBuilder: (context, index) {
-                                return complaintWidget(context, state.complaints[index]);
-                              },
-                              separatorBuilder: (context, index) {
-                                return SizedBox(height: 20,);
-                              }
-                            );
-                          } else if (state is ComplaintsError) {
-                            return Center(child: Text(state.message));
-                          }
-                          return Center(child: Text('No complaints available.'));
-                        },
-                      ),
-                  ),
-                  
-                  
+                  Text('SORT BY ', style: GoogleFonts.plusJakartaSans(fontSize: 10, color: AppColors.primaryColor),),
+                  Text('DATE ADDED ', style: GoogleFonts.plusJakartaSans(fontSize: 10, color: AppColors.primaryColor, fontWeight: FontWeight.w600),),
+                  const Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: AppColors.primaryColor,
+                  )
                 ],
+              ),
+            ),
+
+            Expanded(
+              child: BlocBuilder<ComplaintsBloc, ComplaintsState>(
+                builder: (context, state) {
+                  if (state is ComplaintsLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state is ComplaintsLoaded) {
+                    return ListView.separated(
+                      itemCount: state.complaints.length,
+                      itemBuilder: (context, index) {
+                        return complaintWidget(context, state.complaints[index]);
+                      },
+                      separatorBuilder: (context, index) {
+                        return SizedBox(height: 20,);
+                      }
+                    );
+                  } else if (state is ComplaintsError) {
+                    return Center(child: Text(state.message));
+                  }
+                  return Center(child: Text('No complaints available.'));
+                },
               ),
             ),
 
