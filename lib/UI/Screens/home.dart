@@ -1,3 +1,4 @@
+import 'package:bo_complaints/UI/Widgets/add_complaints.dart';
 import 'package:bo_complaints/UI/Widgets/add_update_complaint_widget.dart';
 import 'package:bo_complaints/UI/Widgets/complaint_widget.dart';
 import 'package:bo_complaints/UI/constants/app_colors.dart';
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                                 context: context,
                                 isScrollControlled: true,
                                 backgroundColor: Colors.transparent,
-                                builder: (_) => ComplaintBottomSheet(),
+                                builder: (_) => AddComplaintBottomSheet(),
                               );
                             },
                             child: Container(

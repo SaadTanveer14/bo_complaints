@@ -1,6 +1,6 @@
 class UpdateComplaint {
-  final String id;
-  final String status;
+  final int id;
+  final int status;
   final String comment;
 
   UpdateComplaint({
