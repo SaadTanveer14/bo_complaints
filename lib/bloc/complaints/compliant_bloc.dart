@@ -1,3 +1,4 @@
+import 'package:bo_complaints/UI/constants/helper.dart';
 import 'package:bo_complaints/bloc/complaints/complaint_event.dart';
 import 'package:bo_complaints/bloc/complaints/compliant_state.dart';
 import 'package:bo_complaints/data/models/complaint_model.dart';
@@ -11,6 +12,11 @@ class ComplaintsBloc extends Bloc<ComplaintsEvent, ComplaintsState> {
 
   ComplaintsBloc(this.repository) : super(ComplaintsInitial()) {
     on<FetchComplaints>((event, emit) async {
+      bool isConnected = await Helper().checkInternetConnectivity();
+      if (!isConnected) {
+        emit(ComplaintsError('No internet connection'));
+        return;
+      }
       emit(ComplaintsLoading());
       try {
         final complaints = await repository.getComplaints();

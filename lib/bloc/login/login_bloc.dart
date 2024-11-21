@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bo_complaints/UI/constants/helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:local_auth/local_auth.dart';
@@ -20,6 +21,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> _checkBiometricAvailability(
       CheckBiometricAvailability event, Emitter<LoginState> emit) async {
     try {
+      
+
+
       bool isBiometricAvailable = await _localAuthentication.canCheckBiometrics;
       List<BiometricType> availableBiometrics =
           await _localAuthentication.getAvailableBiometrics();
@@ -63,6 +67,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future<void> _validatePassword(
       ValidatePassword event, Emitter<LoginState> emit) async {
+
+    bool isConnected = await Helper().checkInternetConnectivity();
+    if (!isConnected) {
+      emit(AuthenticationFailure("No internet connection"));
+      return;
+    }
     try {
       String apiUrl =
           "https://brownonions-002-site2.ftempurl.com/api/ChefRegister/ValidateChefPassword";

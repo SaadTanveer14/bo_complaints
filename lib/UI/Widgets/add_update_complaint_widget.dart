@@ -30,14 +30,14 @@ class _ComplaintBottomSheetState extends State<ComplaintBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    _commentController.text = widget.currentComment;
+    // _commentController.text = widget.currentComment;
     // _selectedStatusId = widget.currentStatusId;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(), // Dismiss keyboard on tap outside
       child: DraggableScrollableSheet(
         initialChildSize: 0.7,
         minChildSize: 0.6,
-        maxChildSize: 0.7,
+        maxChildSize: 0.9,
         builder: (context, scrollController) {
           return Container(
             padding: EdgeInsets.all(20.0),

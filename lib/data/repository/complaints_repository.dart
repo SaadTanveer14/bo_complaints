@@ -22,7 +22,7 @@ class ComplaintsRepository {
   Future<bool> addComplaint(Data addComplaintModel) async {
     try {
       final response = await provider.addComplaint(addComplaintModel);
-      return response != null;
+      return response;
     } catch (e) {
       print("Error adding complaint: $e");
       return false;

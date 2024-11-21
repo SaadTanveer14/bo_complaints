@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:bo_complaints/UI/constants/helper.dart';
 import 'package:bo_complaints/data/models/long_complaint_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bo_complaints/data/repository/complaints_repository.dart';  // Your complaint repository
@@ -17,6 +18,11 @@ class AddComplaintBloc extends Bloc<AddComplaintEvent, AddComplaintState> {
 
   Future<void> _onSubmitAddComplaint(
       SubmitAddComplaintEvent event, Emitter<AddComplaintState> emit) async {
+      bool isConnected = await Helper().checkInternetConnectivity();
+      if (!isConnected) {
+        emit(AddComplaintError(message: "No internet connection"));
+        return;
+      }
     emit(AddComplaintLoading());
     try {
       // Fetch the list of existing complaints to find the max complaintId
@@ -53,6 +59,7 @@ class AddComplaintBloc extends Bloc<AddComplaintEvent, AddComplaintState> {
 
       if (success) {
         emit(AddComplaintSuccess());
+        await complaintsRepository.getComplaints();
       } else {
         emit(AddComplaintError(message: "Failed to add complaint"));
       }

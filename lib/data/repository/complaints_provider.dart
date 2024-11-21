@@ -44,7 +44,7 @@ class ComplaintsProvider {
   Future<bool> addComplaint(Data addComplaintModel) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/api/complaints'),
+        Uri.parse('$baseUrl/AddComplaint'),
         body: json.encode(addComplaintModel.toJson()),
         headers: {'Content-Type': 'application/json'},
       );
